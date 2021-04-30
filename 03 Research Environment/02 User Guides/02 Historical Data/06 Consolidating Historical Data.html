@@ -48,10 +48,14 @@ When we resample our dataframe, an OHLC row will be created for each column in o
 </p>
 
 <div class="section-example-container">
-	<pre class="all">close_prices = df["close"]
+	<pre class="all">
 
-offset = "5T" 
-close_5min_ohlc = close_prices.resample(offset).ohlc()
+offset = "5min"
+df_5min = df[['open', 'high', 'low', 'close', 'volume']].resample(offset).agg({'open': 'first', 
+                                                                                'high': 'max', 
+                                                                                'low': 'min', 
+                                                                                'close': 'last',
+                                                                                'volume': 'sum'})
 </pre>
 </div>
 
